@@ -16,17 +16,13 @@ class Material(models.Model):
     id = models.UUIDField(primary_key=True, editable=False, default=uuid4)
     name = models.CharField(max_length=100)
 
+    def __str__(self):
+        return str(self.name)
 
-class Bill(models.Model):
+
+class Compostition(models.Model):
     id = models.UUIDField(primary_key=True, editable=False, default=uuid4)
-    product = models.OneToOneField(
-        Product, on_delete=models.CASCADE, related_name="bill"
-    )
-    materials = models.ManyToManyField(Material, through="Line")
-
-
-class Line(models.Model):
-    bill = models.ForeignKey(Bill, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     material = models.ForeignKey(Material, on_delete=models.CASCADE)
     quantity = models.PositiveSmallIntegerField()
 
@@ -35,6 +31,18 @@ class Supplier(models.Model):
     id = models.UUIDField(primary_key=True, editable=False, default=uuid4)
     name = models.CharField(max_length=100)
 
+    def __str__(self):
+        return str(self.name)
+
 
 class Source(models.Model):
     id = models.UUIDField(primary_key=True, editable=False, default=uuid4)
+    supplier = models.ForeignKey(
+        Supplier, on_delete=models.SET_NULL, null=True, default=None
+    )
+    material = models.ForeignKey(Material, on_delete=models.CASCADE)
+    quantity = models.PositiveSmallIntegerField()
+    subtotal = models.DecimalField(max_digits=10, decimal_places=2)
+    shipping = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
+    taxes = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
+    link = models.URLField()
