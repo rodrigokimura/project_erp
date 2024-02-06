@@ -1,14 +1,14 @@
 from django.contrib import admin
 
-from .models import Product, Material, Compostition, Source, Supplier
+from .models import Composition, Material, Product, Process, Task
 
 
 class CompositionInline(admin.TabularInline):
-    model = Compostition
+    model = Composition
 
 
-class SourceInline(admin.TabularInline):
-    model = Source
+class TaskInline(admin.TabularInline):
+    model = Task
 
 
 @admin.register(Product)
@@ -20,4 +20,9 @@ class ProductAdmin(admin.ModelAdmin):
 @admin.register(Material)
 class MaterialAdmin(admin.ModelAdmin):
     list_display = ["id", "name"]
-    inlines = [SourceInline]
+
+
+@admin.register(Process)
+class ProcessAdmin(admin.ModelAdmin):
+    list_display = ["id", "product"]
+    inlines = [TaskInline]

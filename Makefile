@@ -6,3 +6,6 @@ migrations:
 
 migrate:
 	@pipenv run python manage.py migrate
+
+reset:
+	@rm db.sqlite3
