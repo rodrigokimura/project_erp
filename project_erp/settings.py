@@ -29,6 +29,12 @@ ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
+INTERNAL_APPS = [
+    "manufacturing",
+    "prototyping",
+    "acquisition",
+    "financial",
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -37,11 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "manufacturing",
-    "prototyping",
-    "acquisition",
-    "financial",
-]
+] + INTERNAL_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

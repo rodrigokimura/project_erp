@@ -9,6 +9,8 @@ django = "*"
 [dev-packages]
 black = "*"
 isort = "*"
+invoke = "*"
+django-stubs = "*"
 
 [requires]
 python_version = "3.11"
