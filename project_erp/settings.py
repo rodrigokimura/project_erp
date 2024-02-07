@@ -34,6 +34,7 @@ INTERNAL_APPS = [
     "prototyping",
     "acquisition",
     "financial",
+    "inventory",
 ]
 
 INSTALLED_APPS = [

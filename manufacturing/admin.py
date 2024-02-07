@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Composition, Material, Order, Process, Product, Task
+from .models import Composition, Order, Process, Product, Task
 
 
 class CompositionInline(admin.TabularInline):
@@ -13,13 +13,8 @@ class TaskInline(admin.TabularInline):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ["name"]
+    list_display = ["name", "estimated_material_cost"]
     inlines = [CompositionInline]
-
-
-@admin.register(Material)
-class MaterialAdmin(admin.ModelAdmin):
-    list_display = ["name", "estimated_cost"]
 
 
 @admin.register(Process)

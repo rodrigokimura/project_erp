@@ -1,20 +1,15 @@
 from django.contrib import admin
 
-from .models import Item, Order, Record, Source, Supplier
-
-
-class SourceInline(admin.TabularInline):
-    model = Source
+from .models import Order, Record, Source, Supplier
 
 
 class RecordInline(admin.TabularInline):
     model = Record
 
 
-@admin.register(Item)
-class ItemAdmin(admin.ModelAdmin):
-    list_display = ["id", "name"]
-    inlines = [SourceInline]
+@admin.register(Source)
+class SourceAdmin(admin.ModelAdmin):
+    list_display = ["supplier", "material", "quantity", "subtotal", "link"]
 
 
 @admin.register(Order)

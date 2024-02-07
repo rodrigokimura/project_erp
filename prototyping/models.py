@@ -13,20 +13,17 @@ class Prototype(models.Model):
 
 
 class Iteration(models.Model):
-    STATUS_CHOICES = ["created", "built"]
+    STATUS_CHOICES = (
+        ("created", "Created"),
+        ("built", "Built"),
+    )
     id = models.UUIDField(primary_key=True, editable=False, default=uuid4)
     description = models.TextField(blank=True, default="")
     created_at = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(
-        choices={s: s.capitalize() for s in STATUS_CHOICES},
-        max_length=7,
-    )
-    prototype = models.ForeignKey(
-        Prototype,
-        on_delete=models.CASCADE,
-    )
+    status = models.CharField(choices=STATUS_CHOICES, max_length=7)
+    prototype = models.ForeignKey(Prototype, on_delete=models.CASCADE)
 
-    class Meta:
+    class Meta:  # type: ignore
         ordering = ("created_at",)
 
     def __str__(self):
@@ -40,7 +37,7 @@ class Iteration(models.Model):
         compositions = Composition.objects.filter(iteration=self)
         cost = 0
         for c in compositions:
-            cost += c.material.estimated_cost * c.quantity
+            cost += getattr(c.material, "estimated_price", 0) * c.quantity
         return cost
 
 
@@ -48,8 +45,8 @@ class Composition(models.Model):
     id = models.UUIDField(primary_key=True, editable=False, default=uuid4)
     iteration = models.ForeignKey(Iteration, on_delete=models.CASCADE)
     material = models.ForeignKey(
-        "manufacturing.Material",
+        "inventory.Material",
         on_delete=models.CASCADE,
         related_name="prototyping_composition_set",
     )
-    quantity = models.PositiveSmallIntegerField()
+    quantity = models.DecimalField(max_digits=10, decimal_places=3)

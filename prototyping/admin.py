@@ -17,11 +17,18 @@ class IterationInline(admin.TabularInline):
 class PrototypeAdmin(admin.ModelAdmin):
     list_display = [
         "name",
+        # "product",
     ]
     inlines = [IterationInline]
 
 
 @admin.register(Iteration)
 class IterationAdmin(admin.ModelAdmin):
-    list_display = ["id", "prototype", "description", "created_at", "estimated_cost"]
+    list_display = [
+        "prototype",
+        "status",
+        "description",
+        "created_at",
+        "estimated_cost",
+    ]
     inlines = [CompositionInline]

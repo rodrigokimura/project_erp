@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class PrototypingConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'prototyping'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "prototyping"
