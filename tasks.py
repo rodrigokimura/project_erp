@@ -50,7 +50,7 @@ def _load_db(c: Context):
 
 @task
 def dev(c: Context):
-    c.run(manage("runserver 0.0.0.0:8080"))
+    c.run(manage("runserver 0.0.0.0:8888"))
 
 
 @task
