@@ -80,3 +80,9 @@ def dump(c: Context):
 @task
 def load(c: Context):
     _load_db(c)
+
+
+@task
+def lint(c: Context):
+    c.run("python -m black .")
+    c.run("isort .")
