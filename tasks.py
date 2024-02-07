@@ -39,7 +39,7 @@ def _remove_db():
 def _dump_db(c: Context):
     c.run(
         manage(
-            "dumpdata -a -e=auth -e=contenttypes -e=admin --indent=2 > dump/all.json"
+            "dumpdata -a -e=auth -e=contenttypes -e=admin -e=sessions --indent=2 > dump/all.json"
         )
     )
 
