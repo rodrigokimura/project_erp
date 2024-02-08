@@ -11,11 +11,11 @@ def manage(subcommand: str):
 
 
 def _make_migrations(c: Context):
-    c.run(manage("makemigrations"))
+    c.run(manage("makemigrations"), pty=True)
 
 
 def _migrate(c: Context):
-    c.run(manage("migrate"))
+    c.run(manage("migrate"), pty=True)
 
 
 def _remove_migrations():
@@ -27,7 +27,7 @@ def _remove_migrations():
 
 
 def _create_superuser(c: Context):
-    c.run(manage("createsuperuser --noinput"))
+    c.run(manage("createsuperuser --noinput"), pty=True)
 
 
 def _remove_db():
@@ -40,17 +40,18 @@ def _dump_db(c: Context):
     c.run(
         manage(
             "dumpdata -a -e=auth -e=contenttypes -e=admin -e=sessions --indent=2 > dump/all.json"
-        )
+        ),
+        pty=True,
     )
 
 
 def _load_db(c: Context):
-    c.run(manage("loaddata dump/all.json"))
+    c.run(manage("loaddata dump/all.json"), pty=True)
 
 
 @task
 def dev(c: Context):
-    c.run(manage("runserver 0.0.0.0:8888"))
+    c.run(manage("runserver 0.0.0.0:8888"), pty=True)
 
 
 @task
@@ -86,6 +87,13 @@ def load(c: Context):
 def lint(c: Context):
     c.run("python -m black .")
     c.run("python -m isort .")
+    c.run("python -m ruff .")
+    c.run("python -m pyright .")
+
+
+@task
+def test(c: Context):
+    c.run(manage("behave"), pty=True)
 
 
 @task

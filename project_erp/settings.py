@@ -38,14 +38,22 @@ INTERNAL_APPS = [
     "inventory",
 ]
 
-INSTALLED_APPS = [
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
-] + INTERNAL_APPS
+APPS_FROM_LIBS = [
+    "behave_django",
+]
+
+INSTALLED_APPS = (
+    [
+        "django.contrib.admin",
+        "django.contrib.auth",
+        "django.contrib.contenttypes",
+        "django.contrib.sessions",
+        "django.contrib.messages",
+        "django.contrib.staticfiles",
+    ]
+    + INTERNAL_APPS
+    + APPS_FROM_LIBS
+)
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

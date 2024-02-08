@@ -12,7 +12,7 @@ class Base(models.Model):
     def __str__(self):
         return str(self.name)
 
-    class Meta:
+    class Meta:  # type: ignore
         abstract = True
 
 

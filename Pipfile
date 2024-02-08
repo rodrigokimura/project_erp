@@ -7,12 +7,17 @@ name = "pypi"
 django = "*"
 gunicorn = "*"
 whitenoise = "*"
+python-dotenv = "*"
 
 [dev-packages]
 black = "*"
 isort = "*"
 invoke = "*"
 django-stubs = "*"
+behave-django = "*"
+behave = "*"
+ruff = "*"
+pyright = "*"
 
 [requires]
 python_version = "3.11"
