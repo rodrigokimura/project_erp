@@ -85,4 +85,9 @@ def load(c: Context):
 @task
 def lint(c: Context):
     c.run("python -m black .")
-    c.run("isort .")
+    c.run("python -m isort .")
+
+
+@task
+def static(c: Context):
+    c.run(manage("collectstatic --no-input --clear"))
