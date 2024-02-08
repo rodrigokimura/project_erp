@@ -1,5 +1,5 @@
 # Project ERP
 
-## Business rules
+## Summary
 
-- When prototype built, materials are consumed from the inventory
+This project intends to be a minimal and generic ERP web appication using Django with its admin module.
